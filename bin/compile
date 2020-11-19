@@ -19,5 +19,6 @@ else
 fi
 
 echo "-----> Running elm make"
-$cacheDir/elm make $buildDir/elm/Main.elm --output=$buildDir/public/js/main.js | indent
+cd $buildDir
+$cacheDir/elm make ./elm/Main.elm --output=./public/js/main.js | indent
 
