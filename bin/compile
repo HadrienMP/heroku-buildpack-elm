@@ -18,7 +18,9 @@ else
     cd -
 fi
 
+export PATH=$PATH:$cacheDir
+
 echo "-----> Running elm make"
 cd $buildDir
-$cacheDir/elm make ./elm/Main.elm --output=./public/js/main.js | indent
+./elm-make.sh | indent
 
