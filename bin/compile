@@ -4,19 +4,20 @@ indent() {
   sed -u 's/^/       /'
 }
 
-buildDir=$1
-cacheDir=$2
+buildDir=$(cd "$1/" && pwd)
+cacheDir=$(cd "$2/" && pwd)
 
 if [[ -f "$cacheDir/elm" ]]; then
     echo "Reusing elm" | indent
 else
     echo "Downloading elm 0.19.1" | indent
     cd $cacheDir
-    curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.1/binary-for-linux-64-bit.gz
-    gunzip elm.gz
+    curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.1/binary-for-linux-64-bit.gz | indent
+    gunzip elm.gz | indent
     chmod +x elm
     cd -
 fi
 
-cd $buildDir 
-ls | indent
+echo "-----> Running elm make"
+$cacheDir/elm make $buildDir/elm/Main.elm --output=$buildDir/public/js/main.js | indent
+
