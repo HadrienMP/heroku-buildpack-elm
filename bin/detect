@@ -4,5 +4,6 @@ if [ -f $1/elm.json && -f $1/elm-make.sh]; then
   echo "Elm"
   exit 0
 else
+  echo "An elm app must have an elm.json file and an elm-make.sh file at the root"
   exit 1
 fi
